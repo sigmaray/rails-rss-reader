@@ -8,6 +8,6 @@
 -%>
 <% unless current_page.first? %>
 <li class="page-item">
-  <%= link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url, :rel => 'prev', :remote => remote, :class => 'page-link' %>
+  <%= link_to_unless current_page.first?, raw(t 'views.pagination.previous'), url +(current_page.to_i == 2 ? '?page=1' : ''), :rel => 'prev', :remote => remote, :class => 'page-link' %>
 </li>
 <% end %>
