@@ -1,0 +1,8 @@
+br
+= link_to '[home]', '/'
+| &nbsp;
+= link_to '[feeds]', '/home/feeds'
+br
+br
+p
+  | Visible Items Count: #{Item.visible.count}, Visible Feeds Count: #{Feed.visible.count}, Fetchable Feeds Count: #{Feed.fetchable.count}, Latest feed was fetched at: #{Feed.where.not(last_fetched_at: nil).order(:last_fetched_at, :desc).first.last_fetched_at}

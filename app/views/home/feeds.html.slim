@@ -1,0 +1,9 @@
+- if Feed.visible.present?
+  ul
+    - Feed.visible.each do |feed|
+      li
+        = link_to feed, "/?feed_id=#{feed.id}"
+        | &nbsp;
+        | (last_fetched_at: #{feed.last_fetched_at})
+- else
+  | No feeds

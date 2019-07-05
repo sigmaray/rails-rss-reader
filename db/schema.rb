@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_042203) do
+ActiveRecord::Schema.define(version: 2019_07_04_081922) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -28,9 +28,24 @@ ActiveRecord::Schema.define(version: 2019_07_04_042203) do
 
   create_table "feeds", force: :cascade do |t|
     t.text "url"
-    t.integer "interval"
+    t.integer "interval_seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_fetched_at"
+    t.boolean "should_fetch", default: true
+    t.boolean "should_show", default: true
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.text "link"
+    t.text "description"
+    t.datetime "pub_date"
+    t.text "title"
+    t.text "json"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "feed_id"
+    t.index ["feed_id"], name: "index_items_on_feed_id"
   end
 
 end

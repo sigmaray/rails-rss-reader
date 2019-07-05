@@ -38,6 +38,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'activeadmin'
 gem 'sidekiq'
+gem 'slim-rails'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails'
+gem 'simple-rss'
+gem 'bootstrap4-kaminari-views'
+# gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
