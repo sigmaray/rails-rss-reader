@@ -1,14 +1,6 @@
-module ReversePaginationHelper
-  # def reverse_pagination(paginator)
-  #   pagination_element = content_tag :div, '', :class => 'pagination'
-  #   (1..paginator.total_pages).to_a.reverse.each do 
-  #     paginator.page
-  #     pagination_element << link_to(request.GET.merge(:page => paginator.page, :class => "#{ page == paginator.page ? 'active' : '' }")
-  #   end
-    
-  #   pagination_element
-  # end
+# https://medium.com/@Flyr1Q/rails-reverse-pagination-from-scratch-74346c9ab556
 
+module ReversePaginationHelper
   def reverse_pagination(paginator)
     return if paginator.records.blank?
 

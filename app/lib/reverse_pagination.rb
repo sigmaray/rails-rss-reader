@@ -1,3 +1,5 @@
+# https://medium.com/@Flyr1Q/rails-reverse-pagination-from-scratch-74346c9ab556
+
 class ReversePagination
   attr_reader :page, :per_page, :total_count, :total_pages, :records, :scope
 
@@ -5,7 +7,7 @@ class ReversePagination
     @scope = scope
     initialize_params(scope.klass, page, per_page)
 
-    # @records = scope.limit(limit).offset(offset)#.order(:created_at).reverse
+    # @records = scope.limit(limit).offset(offset).order(:created_at).reverse
     # @records = scope.limit(limit).offset(offset).order(:pub_date).reverse    
     @records = scope.limit(limit).offset(offset).reverse    
   end
@@ -13,8 +15,6 @@ class ReversePagination
   def initialize_params(klass, page, per_page)
     @per_page = per_page
     # @per_page = klass::PER_PAGE
-    # @total_count = klass.count
-    # @total_count = klass.count
     @total_count = scope.count
     @total_pages = total_count / per_page
     @total_pages = 1 if @total_pages == 0 && @total_count > 0
