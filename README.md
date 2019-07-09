@@ -31,3 +31,15 @@ rails s -p %PORT_NUMBER%
 ```
 rake rss:daemon
 ```
+
+# Screenshots
+
+![image](https://user-images.githubusercontent.com/1594701/60866336-bf1d2900-a230-11e9-912c-4e1e76364c1e.png)
+
+![image](https://user-images.githubusercontent.com/1594701/60866518-3652bd00-a231-11e9-9758-c9258462c4cf.png)
+
+![image](https://user-images.githubusercontent.com/1594701/60866548-48ccf680-a231-11e9-9e1a-4c29855eeb40.png)
+
+
+
+
