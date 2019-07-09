@@ -11,9 +11,9 @@ module ReversePaginationHelper
 
   def reverse_pagination(paginator)
     return if paginator.records.blank?
-    # afford = 5
+
     pagination_element = content_tag :div, '', :class => 'pagination'
-    # pagination_element << link_to('[first]', request.GET.merge(:page => 1)
+
     pagination_element << if !paginator.last_page?
       link_to('[last]', request.GET.merge(:page => paginator.total_pages))
     else
