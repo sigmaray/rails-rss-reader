@@ -7,17 +7,17 @@
 
 - if @paginator.records.present?
   - if @paginator.has_next_pages?
-    .jumbotron
+    .jumbotron.jumbotron--small-padding
       h4= link_to "Go to next page (#{(@paginator.page + 1)})", request.GET.merge(page: (@paginator.page + 1))
   - @paginator.records.each do |item|
-    .jumbotron
+    .jumbotron.jumbotron--small-padding
       - if item.title.present?
         h3 = item.title.html_safe
       = link_to item.link, item.link
       .mt-3= item.pub_date
       .mt-3= raw item.description.html_safe
   - if @paginator.has_previous_pages?
-    .jumbotron
+    .jumbotron.jumbotron--small-padding
       h4= link_to "Go to previous page (#{(@paginator.page - 1)})", request.GET.merge(page: (@paginator.page - 1))
 
 - else
