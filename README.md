@@ -40,6 +40,8 @@ rake rss:daemon
 
 ![image](https://user-images.githubusercontent.com/1594701/60866548-48ccf680-a231-11e9-9e1a-4c29855eeb40.png)
 
+# Credits
 
+http://michalorman.com/2015/03/daemons-in-rails-environment/
 
-
+https://medium.com/@Flyr1Q/rails-reverse-pagination-from-scratch-74346c9ab556
