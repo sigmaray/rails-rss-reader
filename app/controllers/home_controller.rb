@@ -46,6 +46,7 @@ class ReversePagination
   end
 
   def offset
+    return 0 if @scope.count == 0
     (@page - 1) * @per_page
   end
 

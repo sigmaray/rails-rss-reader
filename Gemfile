@@ -44,6 +44,7 @@ gem 'jquery-rails'
 gem 'simple-rss'
 gem 'bootstrap4-kaminari-views'
 # gem 'will_paginate'
+gem 'pg'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
