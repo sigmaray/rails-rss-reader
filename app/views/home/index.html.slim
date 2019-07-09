@@ -1,9 +1,7 @@
 - if @feed.present?
   p Filtering feed: #{@feed}
 
-- #= paginate @items, theme: 'twitter-bootstrap-4'
 .mb-3= reverse_pagination @paginator
-/ = will_paginate @items, reverse: true, :reverse => true, :page_links => false
 
 - if @paginator.records.present?
   - if @paginator.has_next_pages?
@@ -22,5 +20,5 @@
 
 - else
   | No records found.
-- #= paginate @items, theme: 'twitter-bootstrap-4'
+
 = reverse_pagination @paginator

@@ -42,8 +42,6 @@ gem 'slim-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'simple-rss'
-gem 'bootstrap4-kaminari-views'
-# gem 'will_paginate'
 gem 'pg'
 
 group :development, :test do
