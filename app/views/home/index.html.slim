@@ -11,7 +11,7 @@
     .jumbotron.jumbotron--small-padding
       - if item.title.present?
         h3 = item.title.html_safe
-      = link_to item.link, item.link
+      .mt-1= link_to item.link, item.link
       .mt-3= item.pub_date
       .mt-3= raw item.description.html_safe
   - if @paginator.has_previous_pages?

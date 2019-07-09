@@ -3,11 +3,11 @@ require 'simple-rss'
 require 'open-uri'
 
 namespace :rss do
-  desc "TODO"
+  desc "Daemon for fetching rss feeds"
   task daemon: :environment do
     # Signal.trap('TERM') { abort }
 
-    def insp(arr)
+    def print_array(arr)
       p arr.inspect
     end
 
@@ -28,7 +28,7 @@ namespace :rss do
             end
           end
         rescue => se
-          p "Rescued fetching error: #{se.inspect} [feed: #{f.url}]"
+          p "Rescued network error: #{se.inspect} [feed: #{f.url}]"
         end
 
         f.last_fetched_at = Time.now
@@ -41,21 +41,21 @@ namespace :rss do
 
     fetching_now = []
     fetch_queue = []
+    last_printed = nil
 
     20.times do |t|
       spy = Thread.new do
-        p "Started fetcher_thread ##{t}"
+        p "Started fetch thread ##{t}"
         loop do
           fetch_queue.each do |fq|
             next if fetching_now.include?(fq)
             fetching_now << fq
-            # sleep 5
             f = Feed.find(fq)
-            puts "Fetching feed: #{f.url}"
+            p "Fetching feed: #{f.url}"
             fetch_feed f
             fetching_now.delete fq
             fetch_queue.delete fq
-            puts "Ended fetching feed: #{f.url}"
+            p "Finished fetching feed: #{f.url}"
           end
 
           sleep(0.01)
@@ -63,14 +63,11 @@ namespace :rss do
       end
     end
 
-    last_printed = nil
     loop do
-      # Daemon code goes here...
-
       if last_printed.blank? || ((Time.now - last_printed) > 1)
-        insp ['fetch_queue', fetch_queue]
-        insp ['fetch_queue.length', fetch_queue.length]
-        insp ['fetching_now', fetching_now]
+        print_array ['fetch_queue', fetch_queue]
+        print_array ['fetch_queue.length', fetch_queue.length]
+        print_array ['fetching_now', fetching_now]
         last_printed = Time.now
       end
 
@@ -78,13 +75,9 @@ namespace :rss do
         t = Time.now
         if f.last_fetched_at.present? 
           if f.interval_seconds.present?
-            if (t-f.last_fetched_at) < f.interval_seconds
-              next
-            end
+            next if (t-f.last_fetched_at) < f.interval_seconds
           else
-            if (t-f.last_fetched_at) < 60
-              next
-            end
+            next if (t-f.last_fetched_at) < 60
           end
         end
         fetch_queue << f.id if !fetch_queue.include?(f.id)
