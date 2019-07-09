@@ -1,24 +1,33 @@
-# README
+RSS reader written in Ruby & Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Setup
 
-Things you may want to cover:
+It's prefferable to use RVM (https://rvm.io/)
 
-* Ruby version
+`cd` intro project folder. Run in terminal:
+```
+bundle install
+rake db:migrate
+```
 
-* System dependencies
+# How to create feeds
 
-* Configuration
+Create sample feeds
 
-* Database creation
+Edit `db/seeds.rb`
+Run in terminal:
+`rake db:seed`
 
-* Database initialization
+Or create feeds in /admin
 
-* How to run the test suite
+# How to run web UI
 
-* Services (job queues, cache servers, search engines, etc.)
+Run in terminal:
+```
+rails s -p %PORT_NUMBER%
+```
 
-* Deployment instructions
-
-* ...
+# How to run daemon for fetching RSS feeds
+```
+rake rss:daemon
+```
