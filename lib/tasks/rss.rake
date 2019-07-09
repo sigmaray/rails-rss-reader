@@ -49,6 +49,7 @@ namespace :rss do
         loop do
           fetch_queue.each do |fq|
             next if fetching_now.include?(fq)
+
             fetching_now << fq
             f = Feed.find(fq)
             p "Fetching feed: #{f.url}"
@@ -75,13 +76,14 @@ namespace :rss do
         t = Time.now
         if f.last_fetched_at.present? 
           if f.interval_seconds.present?
-            next if (t-f.last_fetched_at) < f.interval_seconds
+            next if (t - f.last_fetched_at) < f.interval_seconds
           else
-            next if (t-f.last_fetched_at) < 60
+            next if (t - f.last_fetched_at) < 60
           end
         end
         fetch_queue << f.id if !fetch_queue.include?(f.id)
       end
+
       sleep(0.01)
     end
   end
