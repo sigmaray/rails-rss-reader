@@ -1,33 +1,21 @@
-/ h1 Home#index
-/ p Find me in app/views/home/index.html.slim
-
 - if @feed.present?
   p Filtering feed: #{@feed}
 
 - #= paginate @items, theme: 'twitter-bootstrap-4'
-= reverse_links_pagination @paginator
+.mb-3= reverse_links_pagination @paginator
 / = will_paginate @items, reverse: true, :reverse => true, :page_links => false
-/! Main component for a primary marketing message or call to action
-/ - @items.each do |item|
+
 - if @paginator.records.present?
   - if @paginator.has_next_pages?
     .jumbotron
       h4= link_to "Go to next page (#{(@paginator.page + 1)})", request.GET.merge(page: (@paginator.page + 1))
   - @paginator.records.each do |item|
     .jumbotron
-      / h1 Navbar example
-      / p This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.
-      / p
-      /   a.btn.btn-lg.btn-primary href="../../components/#navbar" role="button"  View navbar docs &raquo;
       - if item.title.present?
         h3 = item.title.html_safe
       = link_to item.link, item.link
-      br
-      br
-      = item.pub_date
-      br
-      br
-      p= raw item.description.html_safe
+      .mt-3= item.pub_date
+      .mt-3= raw item.description.html_safe
   - if @paginator.has_previous_pages?
     .jumbotron
       h4= link_to "Go to previous page (#{(@paginator.page - 1)})", request.GET.merge(page: (@paginator.page - 1))
@@ -36,6 +24,3 @@
   | No records found.
 - #= paginate @items, theme: 'twitter-bootstrap-4'
 = reverse_links_pagination @paginator
-br
-br
-br
