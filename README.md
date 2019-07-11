@@ -4,7 +4,9 @@ RSS reader written in Ruby & Rails
 
 It's prefferable to use RVM (https://rvm.io/)
 
-`cd` intro project folder. Run in terminal:
+Edit `config/database.yml`.
+`cd` intro project folder.
+Run in terminal:
 ```
 bundle install
 rake db:migrate
