@@ -7,10 +7,6 @@ namespace :rss do
   task daemon: :environment do
     # Signal.trap('TERM') { abort }
 
-    def print_array(arr)
-      p arr.inspect
-    end
-
     def fetch_feed(f)
       begin
         begin 
@@ -27,25 +23,25 @@ namespace :rss do
               )
             end
           end
-        rescue => se
-          p "Rescued network error: #{se.inspect} [feed: #{f.url}]"
+        rescue => e
+          p "Rescued network error: #{e.inspect} [feed: #{f.url}]"
         end
 
         f.last_fetched_at = Time.now
         f.save!
 
-      rescue => ex
-        p "Rescued general error: #{ex.inspect}"
+      rescue => e
+        p "Rescued general error: #{e.inspect}"
       end
     end
 
     fetching_now = []
     fetch_queue = []
-    last_printed = nil
+    last_printed_at = nil
 
     20.times do |t|
       spy = Thread.new do
-        p "Started fetch thread ##{t}"
+        p "Started thread ##{t}"
         loop do
           fetch_queue.each do |fq|
             next if fetching_now.include?(fq)
@@ -65,11 +61,11 @@ namespace :rss do
     end
 
     loop do
-      if last_printed.blank? || ((Time.now - last_printed) > 1)
-        print_array ['fetch_queue', fetch_queue]
-        print_array ['fetch_queue.length', fetch_queue.length]
-        print_array ['fetching_now', fetching_now]
-        last_printed = Time.now
+      if last_printed_at.blank? || ((Time.now - last_printed_at) > 1)
+        p ['fetch_queue', fetch_queue].inspect
+        p ['fetch_queue.length', fetch_queue.length].inspect
+        p ['fetching_now', fetching_now].inspect
+        last_printed_at = Time.now
       end
 
       Feed.fetchable.each do |f|
